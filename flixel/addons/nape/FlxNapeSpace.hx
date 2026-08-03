@@ -58,29 +58,20 @@ class FlxNapeSpace extends FlxBasic
 	static var drawDebugButton:FlxSystemButton;
 	#end
 
-	static var initialized:Bool = false;
-
 	/**
 	 * Needs to be called before creating any FlxNapeSprites
 	 * / FlxNapeTilemaps to initialize the space.
 	 */
 	public static function init():Void
 	{
-		if (initialized)
+		if (FlxG.plugins.get(FlxNapeSpace) == null)
 		{
-			if (space == null)
-				space = new Space(new Vec2());
-
-			return;
+			#if (flixel < version("5.6.0"))
+			FlxG.plugins.add(new FlxNapeSpace());
+			#else
+			FlxG.plugins.addPlugin(new FlxNapeSpace());
+			#end
 		}
-
-		initialized = true;
-
-		#if (flixel < "5.6.0")
-		FlxG.plugins.add(new FlxNapeSpace());
-		#else
-		FlxG.plugins.addPlugin(new FlxNapeSpace());
-		#end
 
 		if (space == null)
 			space = new Space(new Vec2());
