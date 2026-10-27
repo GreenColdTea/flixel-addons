@@ -202,7 +202,7 @@ class FlxBackdrop extends FlxSprite
 		final frame = drawBlit ? _blitGraphic.imageFrame.frame : _frame;
 		
 		// The distance between repeated sprites, in screen space
-		final tileSize = FlxPoint.get(frame.frame.width, frame.frame.height);
+		final tileSize = FlxPoint.get(frame.sourceSize.x, frame.sourceSize.y);
 		if (drawDirect)
 			tileSize.addPoint(spacing);
 		
@@ -278,14 +278,14 @@ class FlxBackdrop extends FlxSprite
 		_matrix.translate(-origin.x, -origin.y);
 		
 		// The distance between repeated sprites, in screen space
-		final tileSize = FlxPoint.get(frame.frame.width, frame.frame.height);
+		final tileSize = FlxPoint.get(frame.sourceSize.x, frame.sourceSize.y);
 		
 		if (drawDirect)
 		{
 			tileSize.set
 			(
-				(frame.frame.width  + spacing.x) * scale.x,
-				(frame.frame.height + spacing.y) * scale.y
+				(frame.sourceSize.x  + spacing.x) * scale.x,
+				(frame.sourceSize.y + spacing.y) * scale.y
 			);
 			
 			_matrix.scale(scale.x, scale.y);
